@@ -6,11 +6,11 @@ import { RepoList } from './components/RepoList'
 
 function App() {
   return (
-    <div className='h-screen bg-slate-900'>
+    <div className='h-full min-h-screen bg-slate-900'>
       <TopBar />
       <div className='mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4'>
         <RepoList />
-        <Favorites />
+        {/* <Favorites /> */}
       </div>
     </div>
   )
