@@ -1,79 +1,50 @@
-import { useState, useEffect } from 'react'
 import { DAYS_SPAN, GITHUB_URL, RESULTS_AMOUNT } from '../config'
+import { useFetchData } from '../hooks/useFetchData'
+import { useLocalStorage } from '../hooks/useLocalStorage'
+import { RepoItem } from '../types/repo'
 import { getPastDate } from '../utils/dates'
 import { LoadingSkeleton } from './LoadingSkeleton'
 
-type RepoItem = {
-  id: number
-  name: string
-  full_name: string
-  description: string
-  html_url: string
-  watchers: number
-  stargazers_count: number
-}
+import starFullIcon from '../assets/star-full.png'
+import starEmptyIcon from '../assets/star-empty.png'
 
-type RepoData = {
-  total_count: number
-  incomplete_results: boolean
-  items: Array<RepoItem>
-}
-
-// TODO: move to utils?
-const useFetchData = (url: string) => {
-  const [data, setData] = useState<RepoData | null>(null)
-  const [loading, setLoading] = useState<boolean>(false)
-  const [error, setError] = useState<Error | null>(null)
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true)
-      try {
-        const response = await fetch(url)
-        if (!response.ok) {
-          throw new Error('Request failed')
-        }
-        const json: RepoData = await response.json()
-        setData(json)
-        setLoading(false)
-
-        console.log('----', json)
-      } catch (error) {
-        setError(error as Error)
-        setLoading(false)
-      }
-    }
-
-    fetchData()
-  }, [url])
-
-  return { data, loading, error }
-}
-
-export const RepoList = () => {
+export const RepoList = ({ isVisible = true }: { isVisible?: boolean }) => {
   const date = getPastDate(DAYS_SPAN)
   const query = `${GITHUB_URL}?q=created:>${date}&sort=stars&order=desc&per_page=${RESULTS_AMOUNT}`
 
-  const { data, loading, error } = useFetchData(query)
+  const { data: repositories, loading, error } = useFetchData(query)
+  const [favoriteRepos, setFavoriteRepos] = useLocalStorage('favoriteRepos', [])
+
+  const addFavoriteRepo = (repo: RepoItem) => {
+    if (!favoriteRepos.some((el: RepoItem) => el.id === repo.id)) {
+      setFavoriteRepos([...favoriteRepos, repo])
+    }
+  }
+
+  const removeFavoriteRepo = (repo: RepoItem) => {
+    setFavoriteRepos(favoriteRepos.filter((el: RepoItem) => el.id !== repo.id))
+  }
 
   if (loading) {
     return <LoadingSkeleton />
   }
 
   if (error) {
-    // TODO: improve style
-    return <div>Error: {error.message}</div>
+    return <div className='rounded bg-red-800 px-4 py-2 font-bold text-white'>Error: {error.message}</div>
   }
 
-  if (!data) {
+  if (!repositories) {
     // TODO: improve style
     return <div>No data available</div>
   }
 
-  const tableHeader = ['Stars', 'Repo Name', 'Description', 'Action']
+  const tableHeader = ['Stars', 'Repo Name', 'Description', 'Language', 'Favorite']
 
   return (
-    <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
+    <div className={`relative overflow-x-auto shadow-md sm:rounded-lg ${isVisible ? '' : 'hidden'}`}>
+      <h2 className='text-sm text-white'>
+        Celestial Gems of the Last <strong>{DAYS_SPAN}</strong> Days
+      </h2>
       <table className='mt-10 w-full text-left text-sm text-gray-400'>
         <thead className='bg-gray-700 text-xs uppercase text-gray-400'>
           <tr>
@@ -85,23 +56,30 @@ export const RepoList = () => {
           </tr>
         </thead>
         <tbody>
-          {data.items.length > 0 ? (
-            data.items.map((item: RepoItem) => (
-              <tr
-                key={item.id}
-                className='border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600'
-              >
+          {repositories.items.length > 0 ? (
+            repositories.items.map((item: RepoItem) => (
+              <tr key={item.id} className='border-b border-gray-700 bg-gray-800 hover:bg-gray-600'>
                 <td className='px-6 py-4'>{item.stargazers_count}</td>
-                <td className='whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white'>
+                <td className='whitespace-nowrap px-6 py-4 font-medium text-white hover:underline'>
                   <a href={item.html_url} target='_blank' rel='noreferrer'>
                     {item.name}
                   </a>
                 </td>
                 <td className='px-6 py-4'>{item.description}</td>
+                <td className='px-6 py-4'>{item.language ?? 'N/A'}</td>
                 <td className='px-6 py-4'>
-                  <a href='/#' className='font-medium text-blue-600 hover:underline dark:text-blue-500'>
-                    Favorite
-                  </a>
+                  {favoriteRepos.some((el: RepoItem) => el.id === item.id) ? (
+                    <button
+                      className='font-medium text-blue-500 hover:underline'
+                      onClick={() => removeFavoriteRepo(item)}
+                    >
+                      <img className='h-8 w-8' src={starFullIcon} alt='remove from favorites' />
+                    </button>
+                  ) : (
+                    <button className='font-medium text-blue-500 hover:underline' onClick={() => addFavoriteRepo(item)}>
+                      <img className='h-8 w-8' src={starEmptyIcon} alt='add to favorites' />
+                    </button>
+                  )}
                 </td>
               </tr>
             ))
