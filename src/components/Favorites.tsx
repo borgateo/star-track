@@ -1,9 +1,11 @@
 import { useLocalStorage } from '../hooks/useLocalStorage'
+
 import { RepoItem } from '../types/repo'
+import { Tab } from '../types/tab'
 
 import removeIcon from '../assets/remove.png'
 
-export const Favorites = ({ isVisible = true }: { isVisible?: boolean }) => {
+export const Favorites = ({ tab }: { tab: Tab }) => {
   const [favoriteRepos, setFavoriteRepos] = useLocalStorage('favoriteRepos', [])
 
   const tableHeader = ['Stars', 'Repo Name', 'Description', 'Language', 'Favorite']
@@ -13,7 +15,7 @@ export const Favorites = ({ isVisible = true }: { isVisible?: boolean }) => {
   }
 
   return (
-    <div className={`relative overflow-x-auto shadow-md sm:rounded-lg ${isVisible ? '' : 'hidden'}`}>
+    <div id={`tab-${tab}`} className={'relative overflow-x-auto shadow-md sm:rounded-lg'}>
       <h2 className='text-sm text-white'>Favorite Celestial Gems</h2>
       <table className='mt-10 w-full text-left text-sm text-gray-400'>
         <thead className='bg-gray-700 text-xs uppercase text-gray-400'>

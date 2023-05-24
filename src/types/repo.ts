@@ -14,10 +14,3 @@ export type RepoData = {
   incomplete_results: boolean
   items: Array<RepoItem>
 }
-
-export enum TabType {
-  Favorites = 'favorites',
-  Repos = 'repos',
-}
-
-export type Tab = TabType.Favorites | TabType.Repos

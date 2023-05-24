@@ -2,6 +2,7 @@ import { Avatar } from './Avatar'
 
 export const TopBar = () => {
   // FIXME: mock data
+  // out of scope: if I add a Auth system, I could use the real user data here
   const userData = {
     id: 21312,
     name: 'Matt Borgato',

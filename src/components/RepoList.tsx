@@ -8,7 +8,9 @@ import { LoadingSkeleton } from './LoadingSkeleton'
 import starFullIcon from '../assets/star-full.png'
 import starEmptyIcon from '../assets/star-empty.png'
 
-export const RepoList = ({ isVisible = true }: { isVisible?: boolean }) => {
+import { Tab } from '../types/tab'
+
+export const RepoList = ({ tab }: { tab: Tab }) => {
   const date = getPastDate(DAYS_SPAN)
   const query = `${GITHUB_URL}?q=created:>${date}&sort=stars&order=desc&per_page=${RESULTS_AMOUNT}`
 
@@ -38,10 +40,11 @@ export const RepoList = ({ isVisible = true }: { isVisible?: boolean }) => {
     return <div>No data available</div>
   }
 
+  // static headers of the table
   const tableHeader = ['Stars', 'Repo Name', 'Description', 'Language', 'Favorite']
 
   return (
-    <div className={`relative overflow-x-auto shadow-md sm:rounded-lg ${isVisible ? '' : 'hidden'}`}>
+    <div id={`tab-${tab}`} className={'relative overflow-x-auto shadow-md sm:rounded-lg'}>
       <h2 className='text-sm text-white'>
         Celestial Gems of the Last <strong>{DAYS_SPAN}</strong> Days
       </h2>
