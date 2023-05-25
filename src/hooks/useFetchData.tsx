@@ -1,19 +1,18 @@
 import { useState, useEffect } from 'react'
 import { RepoData } from '../types/repo'
 
+import { MOCK_DATA_MODE } from '../config'
+
 export const useFetchData = (url: string) => {
   const [data, setData] = useState<RepoData | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error | null>(null)
 
-  // after N requests, GH returns an error saying that I reached the limit of requests for my IP
-  const mockDataMode = true
-
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true)
       try {
-        const response = await fetch(mockDataMode ? 'mock.json' : url)
+        const response = await fetch(MOCK_DATA_MODE ? 'mock.json' : url)
         if (!response.ok) {
           throw new Error('Request failed')
         }
@@ -27,7 +26,7 @@ export const useFetchData = (url: string) => {
     }
 
     fetchData()
-  }, [url, mockDataMode])
+  }, [url])
 
   return { data, loading, error }
 }
