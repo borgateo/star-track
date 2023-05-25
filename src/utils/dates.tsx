@@ -1,5 +1,9 @@
 // TODO: write tests for this function
 export function getPastDate(days: number): string {
+  if (days < 0) {
+    throw new Error('Invalid input: days cannot be negative')
+  }
+  
   const today = new Date()
   const pastDate = new Date(today.getTime() - days * 24 * 60 * 60 * 1000)
 
