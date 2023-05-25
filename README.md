@@ -1,6 +1,6 @@
 # ⭐️ Star Track
 
-This project is a React application that fetches and displays the top GitHub repositories based on certain criteria. It uses `Vite` as the build tool, `React` as the UI library, `Tailwind CSS` for styling, and `local storage` for data persistence. The project includes testing using `Vitest` and `Testing Library`, although due to time constraints, there are limited test cases available.
+This project is a React (TS) application that fetches and displays the top GitHub repositories based on the number of stars they have received. It uses `Vite` as the build tool, `React` as the UI library, `Tailwind CSS` for styling, and `local storage` for data persistence. The project includes testing using `Vitest` and `Testing Library`, although due to time constraints, there are limited test cases available.
 
 [web site hosted on Netlify](https://startrackgh.netlify.app)
 
