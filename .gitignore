@@ -26,3 +26,5 @@ dist-ssr
 
 # Vitest
 coverage
+# Local Netlify folder
+.netlify

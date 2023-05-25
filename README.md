@@ -2,6 +2,8 @@
 
 This project is a React application that fetches and displays the top GitHub repositories based on certain criteria. It uses `Vite` as the build tool, `React` as the UI library, `Tailwind CSS` for styling, and `local storage` for data persistence. The project includes testing using `Vitest` and `Testing Library`, although due to time constraints, there are limited test cases available.
 
+[web site hosted on Netlify](https://startrackgh.netlify.app)
+
 ## Features
 
 - Fetches the top GitHub repositories based on specified criteria
