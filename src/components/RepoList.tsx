@@ -88,7 +88,7 @@ export const RepoList = ({ tab }: { tab: Tab }) => {
         <select
           id='languages'
           value={selectedLanguage}
-          onChange={(e) => setSelectedLanguage(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedLanguage(e.target.value)}
           className='rounded-lg border border-gray-600 bg-gray-700 p-2.5 text-sm text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500'
         >
           <option value=''>All Languages</option>

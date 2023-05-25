@@ -1,9 +1,4 @@
-interface User {
-  id: number
-  name: string
-  email: string
-  avatarUrl: string
-}
+import { User } from '../types/user'
 
 type AvatarProps = Omit<User, 'id'>
 
