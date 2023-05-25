@@ -28,8 +28,8 @@ This project is a React application that fetches and displays the top GitHub rep
 
 The project includes a [configuration file](./src/config/index.tsx) that allows customization of certain parameters:
 
-- `DAYS_SPAN`: The number of past days to consider when fetching repositories (default: 30)
-- `RESULTS_AMOUNT`: The maximum number of repositories to fetch (default: 100)
+- `DAYS_SPAN`: The number of past days to consider when fetching repositories (default: 7)
+- `RESULTS_AMOUNT`: The maximum number of repositories to fetch (default: 25)
 - `MOCK_DATA_MODE`: A flag to enable/disable the use of static JSON data instead of making actual API calls (default: false)
 
 ## Prerequisites
