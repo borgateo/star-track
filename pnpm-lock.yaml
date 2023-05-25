@@ -60,9 +60,6 @@ devDependencies:
   eslint-plugin-react-refresh:
     specifier: ^0.3.4
     version: 0.3.4(eslint@8.38.0)
-  happy-dom:
-    specifier: ^9.20.3
-    version: 9.20.3
   jsdom:
     specifier: ^22.0.0
     version: 22.0.0
@@ -89,7 +86,7 @@ devDependencies:
     version: 1.8.1(eslint@8.38.0)(vite@4.3.2)
   vitest:
     specifier: ^0.31.1
-    version: 0.31.1(happy-dom@9.20.3)(jsdom@22.0.0)
+    version: 0.31.1(jsdom@22.0.0)
 
 packages:
 
@@ -1003,7 +1000,7 @@ packages:
       magic-string: 0.30.0
       picocolors: 1.0.0
       std-env: 3.3.3
-      vitest: 0.31.1(happy-dom@9.20.3)(jsdom@22.0.0)
+      vitest: 0.31.1(jsdom@22.0.0)
     dev: true
 
   /@vitest/expect@0.31.1:
@@ -2259,17 +2256,6 @@ packages:
 
   /grapheme-splitter@1.0.4:
     resolution: {integrity: sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==}
-    dev: true
-
-  /happy-dom@9.20.3:
-    resolution: {integrity: sha512-eBsgauT435fXFvQDNcmm5QbGtYzxEzOaX35Ia+h6yP/wwa4xSWZh1CfP+mGby8Hk6Xu59mTkpyf72rUXHNxY7A==}
-    dependencies:
-      css.escape: 1.5.1
-      entities: 4.5.0
-      iconv-lite: 0.6.3
-      webidl-conversions: 7.0.0
-      whatwg-encoding: 2.0.0
-      whatwg-mimetype: 3.0.0
     dev: true
 
   /has-bigints@1.0.2:
@@ -3928,7 +3914,7 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitest@0.31.1(happy-dom@9.20.3)(jsdom@22.0.0):
+  /vitest@0.31.1(jsdom@22.0.0):
     resolution: {integrity: sha512-/dOoOgzoFk/5pTvg1E65WVaobknWREN15+HF+0ucudo3dDG/vCZoXTQrjIfEaWvQXmqScwkRodrTbM/ScMpRcQ==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
@@ -3973,7 +3959,6 @@ packages:
       chai: 4.3.7
       concordance: 5.0.4
       debug: 4.3.4
-      happy-dom: 9.20.3
       jsdom: 22.0.0
       local-pkg: 0.4.3
       magic-string: 0.30.0
