@@ -14,7 +14,7 @@ export const TopBar = () => {
   return (
     <nav className='border-slate-200 bg-slate-700'>
       <div className='mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4'>
-        <a href='add-website-here' className='flex items-center'>
+        <a href='https://startrackgh.netlify.app/' className='flex items-center'>
           <span className='self-center whitespace-nowrap font-mono text-3xl font-semibold text-white'>Star Track</span>
         </a>
         <span className='invisible self-center whitespace-nowrap pl-5 font-mono text-sm text-slate-300 md:visible'>

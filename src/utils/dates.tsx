@@ -1,4 +1,3 @@
-// TODO: write tests for this function
 export function getPastDate(days: number): string {
   if (days < 0) {
     throw new Error('Invalid input: days cannot be negative')
